@@ -4,7 +4,6 @@ import java.util.Date;
 
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;

@@ -24,9 +24,7 @@ public class BehookedKafkaApplication {
 		properties.setProperty("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
 		properties.setProperty("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
 		
-
-
-		new BehookedKafkaConsumer(properties).consume(topicName, new LoggingRecordProcessor());
+		new BehookedKafkaConsumer(properties).consume(topicName, new SendingRecordProcessor());
 
 	}
 
