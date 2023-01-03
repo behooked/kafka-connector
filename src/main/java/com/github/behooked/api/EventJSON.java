@@ -17,23 +17,13 @@ public class EventJSON {
 	
 	
 	@JsonCreator
-	public EventJSON(ConsumerRecord<String,String> kafkaRecord) {     // müsste es hier Record sein und nicht SinkRecord?
+	public EventJSON(ConsumerRecord<String,String> kafkaRecord) {   
 	
 		this.name = kafkaRecord.topic();
 		this.timestamp=new Date(kafkaRecord.timestamp());
 		this.data = kafkaRecord.value().toString();
 	}
-	/*
-	@JsonCreator
-	public EventJSON(ConsumerRecord<String,String> kafkaRecord, @JsonProperty("name")String topicName) {     // müsste es hier Record sein und nicht SinkRecord?
 	
-		this.name = topicName;
-		this.timestamp=new Date(kafkaRecord.timestamp());
-		this.data = kafkaRecord.value().toString();
-		
-	}
-	
-*/
 	@JsonProperty
 	public String getName() {
 		return name;
