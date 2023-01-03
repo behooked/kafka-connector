@@ -36,7 +36,8 @@ public class BehookedKafkaConsumer {
 
 				for (ConsumerRecord<String, String> record : records) {
 					try {
-						processor.processRecord(record, topicName);
+					//	processor.processRecord(record, topicName);
+						processor.processRecord(record);
 								
 					} catch (Exception e) {
 						logger.error("Could not process record", e);
