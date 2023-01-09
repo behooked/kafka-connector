@@ -1,24 +1,33 @@
 package com.github.behooked;
 
+
+
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.github.behooked.api.EventJSON;
 import com.github.behooked.client.NotificationSender;
 
 public class SendingRecordProcessor implements KafkaRecordProcessor {
 
+	public SendingRecordProcessor(NotificationSender notificationSender, EventJSON event) {
+		this.notificationSender = notificationSender;
+		this.event = event;
+	}
+
+
 	private static final Logger logger = LoggerFactory.getLogger(SendingRecordProcessor.class);
 	private NotificationSender notificationSender;
+	
 	private EventJSON event;
-
+	
 	@Override
 
 		public void processRecord(ConsumerRecord<String,String> record) throws Exception {
-		this.notificationSender = new NotificationSender();
-
-		this.event= new EventJSON(record);
+		
+		this.event.setName(record.topic());
+		this.event.setTimestamp(record.timestamp());
+		this.event.setData(record.value().toString());
 		
 		logger.info("Consumed record {} from topic {}", record,record.topic());
 		this.notificationSender.sendNotification(event);
