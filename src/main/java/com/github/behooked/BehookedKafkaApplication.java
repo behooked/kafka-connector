@@ -18,7 +18,6 @@ public class BehookedKafkaApplication {
 			return;
 		}
 
-		
 		String kafkaAddress = args[0];
 		String topicName = args[1];
 
@@ -28,7 +27,13 @@ public class BehookedKafkaApplication {
 		properties.setProperty("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
 		properties.setProperty("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
 		
-		new BehookedKafkaConsumer( new KafkaConsumer<String,String>(properties),new SendingRecordProcessor(new NotificationSender(), new EventJSON())).consume(topicName);
+		
+		KafkaConsumer<String, String> consumer= new KafkaConsumer<String,String>(properties);
+		SendingRecordProcessor processor = new SendingRecordProcessor(new NotificationSender(), new EventJSON());
+		
+		
+		new BehookedKafkaConsumer( consumer,processor).consume(topicName);
+		// new BehookedKafkaConsumer( new KafkaConsumer<String,String>(properties),new SendingRecordProcessor(new NotificationSender(), new EventJSON())).consume(topicName);
 
 	}
 
