@@ -1,6 +1,6 @@
 # kafka-connector
 ---
-The kafka-connector allows you to listen to topic(s) in a Kafka cluster. When messages are available it transforms the data into the format requested from Behooked Dispatcher API and sends it to the Dispatcher Service of Behooked Application.
+The kafka-connector allows you to listen to topic(s) in a Kafka cluster. When messages are available it transforms them into the format requested from Behooked application. Subsequently it sends an event-notification via HTTP call to the dispatcher-service of Behooked. 
 
 ## How to start the kafka-connector:
 ---
